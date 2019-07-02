@@ -1,0 +1,56 @@
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+.board-wrapper {
+  display: flex;
+}
+.income,
+.expenses {
+  width: 50%;
+}
+
+.income{
+  background-color: darkseagreen;
+    border-radius: 15px;
+    margin: 15px;
+}
+.expenses{
+  background-color: burlywood;
+    border-radius: 15px;
+    margin: 15px;
+}
+h1,
+h2 {
+  font-weight: normal;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: block;
+  margin: 20px 50px;
+  background-color: aliceblue;
+  padding: 20px;
+  border-radius: 15px;
+  position: relative;
+  text-align: left;
+}
+
+li span{
+  position: absolute;
+  right: 10px;
+}
+a {
+  color: #42b983;
+}
+
+
