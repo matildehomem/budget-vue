@@ -3,6 +3,11 @@
   padding: 0;
   margin: 0;
 }
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -11,7 +16,11 @@
   text-align: center;
   color: #2c3e50;
 }
-
+.wrapper {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
 header {
   width: 100vw;
   height: 456px;
@@ -39,12 +48,6 @@ header {
 .current-box > p {
   font-size: 15px;
 }
-
-
-
-
-
-
 
 .board-wrapper {
   display: flex;
@@ -110,4 +113,57 @@ a {
 }
 .dead {
   background-image: url(/img/dead.png);
+}
+form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+form div {
+  border: 0;
+}
+fieldset {
+  display: inline-block;
+  border: none;
+}
+fieldset:first-of-type {
+  padding-right: 40px;
+}
+input {
+  display: inline-block;
+  border: none;
+  margin: 0;
+  padding: 10px;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+input[type="submit"] {
+  min-width: 160px;
+  padding: 10px 20px;
+  margin: 0;
+  text-decoration: none;
+  background: #ffd102;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+
+  text-align: center;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+  background: #ffe36e;
+}
+
+input[type="submit"]:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+input[type="submit"]:active {
+  transform: scale(0.99);
 }
