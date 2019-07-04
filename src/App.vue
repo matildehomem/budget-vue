@@ -1,31 +1,32 @@
 <template>
-  <div id="app">
+  <main id="app">
     <header>
       <div class="wrapper">
         <div class="current-wrapper">
-
-
-
-        <div class="pigImage" :class="pigImage"></div>
-      <div class="current-box">
-
-        <p>O meu dinheiro</p>
-        <div class="current-value">{{current}} €</div>
-      </div>
+          <div class="pigImage" :class="pigImage"></div>
+          <div class="current-box">
+            <p>O meu dinheiro</p>
+            <div class="current-value">{{current}} €</div>
+          </div>
         </div>
         <p>Indique aqui as suas receitas ou despesas</p>
 
-
         <form>
-          <label for="name">Descrição</label>
-          <input type="text" v-model="newInputText" />
-          <label for="value">Euro</label>
-          <input type="number" v-model="newInputValue" required />
-          <label for="income">Income</label>
-          <input type="radio" name="type" value="income" v-model="incomeCheck" required />
-          <label for="expense">Expense</label>
-          <input type="radio" name="type" value="expense" v-model="expenseCheck" />
-          <input type="submit" value="submit" @click.prevent="calCurrent()" />
+          <div>
+            <fieldset>
+              <label for="name">Descrição</label>
+              <input type="text" v-model="newInputText" />
+              <label for="value">Euro</label>
+              <input type="number" v-model="newInputValue" required />
+            </fieldset>
+            <fieldset>
+              <label for="income">Income</label>
+              <input type="radio" name="type" value="income" v-model="incomeCheck" required />
+              <label for="expense">Expense</label>
+              <input type="radio" name="type" value="expense" v-model="expenseCheck" />
+            </fieldset>
+          </div>
+          <input type="submit" value="Submeter" @click.prevent="calCurrent()" />
         </form>
       </div>
     </header>
@@ -69,7 +70,7 @@
         </div>
       </div>
     </section>
-  </div>
+  </main>
 </template>
 
 <script>
