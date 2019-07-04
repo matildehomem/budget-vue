@@ -1,11 +1,50 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
+
+header {
+  width: 100vw;
+  height: 456px;
+  background-image: linear-gradient(147deg, #ff5c2e, #b21376);
+  color: white;
+  font-size: 18px;
+}
+
+.current-wrapper {
+  max-width: 468px;
+  margin: 0px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.current-value {
+  font-size: 70px;
+}
+
+.current-box {
+  text-align: right;
+}
+.current-box > p {
+  font-size: 15px;
+}
+
+
+
+
+
+
 
 .board-wrapper {
   display: flex;
@@ -15,15 +54,15 @@
   width: 50%;
 }
 
-.income{
+.income {
   background-color: darkseagreen;
-    border-radius: 15px;
-    margin: 15px;
+  border-radius: 15px;
+  margin: 15px;
 }
-.expenses{
+.expenses {
   background-color: burlywood;
-    border-radius: 15px;
-    margin: 15px;
+  border-radius: 15px;
+  margin: 15px;
 }
 h1,
 h2 {
@@ -45,7 +84,7 @@ li {
   text-align: left;
 }
 
-li span{
+li span {
   position: absolute;
   right: 10px;
 }
@@ -53,4 +92,22 @@ a {
   color: #42b983;
 }
 
+.pigImage {
+  height: 250px;
+  width: 250px;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+}
 
+.happy {
+  background-image: url(/img/happy.png);
+}
+.normal {
+  background-image: url(/img/normal.png);
+}
+.unhappy {
+  background-image: url(/img/unhappy.png);
+}
+.dead {
+  background-image: url(/img/dead.png);
+}
