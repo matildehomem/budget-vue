@@ -10,7 +10,6 @@
           </div>
         </div>
         <p>Indique aqui as suas receitas ou despesas</p>
-
         <form>
           <div>
             <fieldset>
@@ -26,7 +25,7 @@
               <input type="radio" name="type" value="expense" v-model="expenseCheck" />
             </fieldset>
           </div>
-          <input type="submit" value="Submeter" @click.prevent="calCurrent()" />
+          <input type="submit" value="Submeter" @click.prevent="checkType()" />
         </form>
       </div>
     </header>
@@ -91,6 +90,22 @@ export default {
       nextId: 0
     };
   },
+  mounted() {
+    if (localStorage.getItem("incomes")) {
+      try {
+        this.incomes = JSON.parse(localStorage.getItem("incomes"));
+      } catch (e) {
+        localStorage.removeItem("incomes");
+      }
+    }
+    if (localStorage.getItem("expenses")) {
+      try {
+        this.expenses = JSON.parse(localStorage.getItem("expenses"));
+      } catch (e) {
+        localStorage.removeItem("expenses");
+      }
+    }
+  },
   computed: {
     totalIncome() {
       //sum current + input value
@@ -127,8 +142,16 @@ export default {
       return "normal";
     }
   },
+
   methods: {
-    calCurrent() {
+    saveData() {
+      const incomesParsed = JSON.stringify(this.incomes);
+      localStorage.setItem("incomes", incomesParsed);
+      const expensesParsed = JSON.stringify(this.expenses);
+      localStorage.setItem("expenses", expensesParsed);
+    },
+
+    checkType() {
       //if income
       if (this.incomeCheck) {
         //add to income array
@@ -137,6 +160,8 @@ export default {
           name: this.newInputText,
           value: this.newInputValue
         });
+
+        this.saveData();
         this.newInputText = "";
         this.newInputValue = "";
         this.incomeCheck = false;
@@ -149,6 +174,9 @@ export default {
           name: this.newInputText,
           value: this.newInputValue
         });
+
+        this.saveData();
+
         this.newInputText = "";
         this.newInputValue = "";
         this.expenseCheck = false;
@@ -156,6 +184,7 @@ export default {
     },
     removeItem(index, list) {
       this[list].splice(index, 1);
+      this.saveData();
     }
   }
 };
