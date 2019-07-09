@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "countup.js": "^2.0.4",
     "sass-loader": "^7.1.0",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-countup-v2": "^4.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",

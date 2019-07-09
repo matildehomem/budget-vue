@@ -6,7 +6,9 @@
           <div class="pigImage" :class="pigImage"></div>
           <div class="current-box">
             <p>O meu dinheiro</p>
-            <div class="current-value">{{current}} €</div>
+            <div>
+              <ICountUp class="current-value" :endVal="current" />€
+            </div>
           </div>
         </div>
         <p>Indique aqui as suas receitas ou despesas</p>
@@ -47,6 +49,7 @@
                 <button @click="removeItem(index,'incomes')">delete</button>
               </li>
             </ul>
+            <button v-if="incomes.length >= 2" @click="removeList('incomes')">Delete All</button>
           </div>
         </div>
         <div class="expenses">
@@ -65,17 +68,26 @@
                 <button @click="removeItem(index, 'expenses')">delete</button>
               </li>
             </ul>
+            <button v-if="expenses.length >= 2" @click="removeList('expenses')">Delete All</button>
           </div>
         </div>
+        <button
+          v-if="incomes.length >=2 || expenses.length >= 2"
+          @click="removeAll(['incomes', 'expenses'])"
+        >Delete both lists</button>
       </div>
     </section>
   </main>
 </template>
 
 <script>
+import ICountUp from "vue-countup-v2";
 require("@/assets/css/app.css");
 export default {
   name: "app",
+  components: {
+    ICountUp
+  },
   data() {
     return {
       incomeCheck: false,
@@ -90,6 +102,7 @@ export default {
       nextId: 0
     };
   },
+
   mounted() {
     if (localStorage.getItem("incomes")) {
       try {
@@ -144,6 +157,7 @@ export default {
   },
 
   methods: {
+    
     saveData() {
       const incomesParsed = JSON.stringify(this.incomes);
       localStorage.setItem("incomes", incomesParsed);
@@ -185,9 +199,14 @@ export default {
     removeItem(index, list) {
       this[list].splice(index, 1);
       this.saveData();
+    },
+    removeList(list) {
+      this[list] = [];
+      this.saveData();
+    },
+    removeAll(list) {
+      list.forEach(this.removeList);
     }
   }
 };
 </script>
-
-
