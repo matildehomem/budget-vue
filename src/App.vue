@@ -34,48 +34,54 @@
     <section>
       <div class="wrapper board-wrapper">
         <div class="income">
-          <h2>Income</h2>
           <div class="total">
+            <h2>Total de Ganhos</h2>
             <p>
-              TOTAL:
-              <span>{{totalIncome}} €</span>
+              {{totalIncome}}
+              <span>€</span>
             </p>
           </div>
+
           <div class="list">
             <ul>
               <li v-for="(income, index) in incomes" :key="income.id">
-                {{income.name}} -
-                <strong>{{income.value}} €</strong>
-                <button @click="removeItem(index,'incomes')">delete</button>
+                <p>{{income.name}}</p>
+
+                <div>
+                  <strong>{{income.value}}€</strong>
+                  <button @click="removeItem(index,'incomes')" class="remove"></button>
+                </div>
               </li>
             </ul>
             <button v-if="incomes.length >= 2" @click="removeList('incomes')">Delete All</button>
           </div>
         </div>
         <div class="expenses">
-          <h2>Expenses</h2>
           <div class="total">
+            <h2>Total de Despesas</h2>
             <p>
-              TOTAL:
-              <span>{{totalExpenses}}</span>
+              {{totalExpenses}}
+              <span>€</span>
             </p>
           </div>
           <div class="list">
             <ul>
               <li v-for="(expense, index) in expenses" v-bind:key="expense.id">
-                {{expense.name}} -
-                <strong>{{expense.value}} €</strong>
-                <button @click="removeItem(index, 'expenses')">delete</button>
+                <p>{{expense.name}}</p>
+                <div>
+                  <strong>{{expense.value}}€</strong>
+                  <button @click="removeItem(index, 'expenses')" class="remove"></button>
+                </div>
               </li>
             </ul>
             <button v-if="expenses.length >= 2" @click="removeList('expenses')">Delete All</button>
           </div>
         </div>
+      </div>
         <button
           v-if="incomes.length >=2 || expenses.length >= 2"
           @click="removeAll(['incomes', 'expenses'])"
         >Delete both lists</button>
-      </div>
     </section>
   </main>
 </template>
@@ -157,7 +163,6 @@ export default {
   },
 
   methods: {
-    
     saveData() {
       const incomesParsed = JSON.stringify(this.incomes);
       localStorage.setItem("incomes", incomesParsed);
