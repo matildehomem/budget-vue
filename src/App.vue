@@ -20,9 +20,9 @@
               <label for="value">Euro</label>
               <input type="number" v-model="newInputValue" required />
               <label for="income">Income</label>
-              <input type="radio" name="type" value="income" v-model="incomeCheck" />
+              <input type="radio" name="type" id="income" value="income" v-model="picked" />
               <label for="expense">Expense</label>
-              <input type="radio" name="type" value="expense" v-model="expenseCheck" />
+              <input type="radio" name="type" id="expense" value="expense" v-model="picked" />
             </fieldset>
           </div>
           <input type="submit" value="Submeter" @click.prevent="checkType()" />
@@ -94,8 +94,7 @@ export default {
   },
   data() {
     return {
-      incomeCheck: false,
-      expenseCheck: false,
+      picked: "income",
 
       newInputText: "",
       newInputValue: "",
@@ -137,7 +136,7 @@ export default {
     },
     totalExpenses() {
       //sum expenses + input value
-      let result = 0; 
+      let result = 0;
       this.expenses.forEach(element => {
         result += parseInt(element.value);
       });
@@ -170,7 +169,7 @@ export default {
 
     checkType() {
       //if income
-      if (this.incomeCheck) {
+      if (this.picked == "income") {
         //add to income array
         this.incomes.push({
           id: this.nextId++,
@@ -182,9 +181,8 @@ export default {
         this.newInputText = "";
         this.newInputValue = "";
         this.incomeCheck = false;
-      }
-      //if expense
-      if (this.expenseCheck) {
+        //if expense
+      } else {
         //add to income array
         this.expenses.push({
           id: this.nextId++,
