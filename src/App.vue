@@ -19,10 +19,8 @@
               <input type="text" v-model="newInputText" />
               <label for="value">Euro</label>
               <input type="number" v-model="newInputValue" required />
-            </fieldset>
-            <fieldset>
               <label for="income">Income</label>
-              <input type="radio" name="type" value="income" v-model="incomeCheck" required />
+              <input type="radio" name="type" value="income" v-model="incomeCheck" />
               <label for="expense">Expense</label>
               <input type="radio" name="type" value="expense" v-model="expenseCheck" />
             </fieldset>
@@ -78,10 +76,10 @@
           </div>
         </div>
       </div>
-        <button
-          v-if="incomes.length >=2 || expenses.length >= 2"
-          @click="removeAll(['incomes', 'expenses'])"
-        >Delete both lists</button>
+      <button
+        v-if="incomes.length && expenses.length"
+        @click="removeAll(['incomes', 'expenses'])"
+      >Delete both lists</button>
     </section>
   </main>
 </template>
