@@ -137,7 +137,7 @@ export default {
     },
     totalExpenses() {
       //sum expenses + input value
-      let result = 0;
+      let result = 0; 
       this.expenses.forEach(element => {
         result += parseInt(element.value);
       });

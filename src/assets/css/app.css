@@ -112,7 +112,7 @@ li strong {
   font-size: 20px;
 }
 
-.remove{
+.remove {
   background-image: url(/img/remove.svg);
   width: 20px;
   height: 20px;
@@ -158,12 +158,18 @@ fieldset {
 fieldset:first-of-type {
   padding-right: 40px;
 }
+label {
+  margin-right: 20px;
+}
 input {
   border: none;
   margin: 0;
   padding: 10px;
   border-radius: 1.5rem;
   cursor: pointer;
+}
+input[type="text"] {
+  margin-right: 20px;
 }
 input[type="submit"] {
   min-width: 160px;
