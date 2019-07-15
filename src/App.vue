@@ -19,12 +19,10 @@
               <input type="text" v-model="newInputText" />
               <label for="value">Euro</label>
               <input type="number" v-model="newInputValue" required />
-            </fieldset>
-            <fieldset>
               <label for="income">Income</label>
-              <input type="radio" name="type" value="income" v-model="incomeCheck" required />
+              <input type="radio" name="type" id="income" value="income" v-model="picked" />
               <label for="expense">Expense</label>
-              <input type="radio" name="type" value="expense" v-model="expenseCheck" />
+              <input type="radio" name="type" id="expense" value="expense" v-model="picked" />
             </fieldset>
           </div>
           <input type="submit" value="Submeter" @click.prevent="checkType()" />
@@ -78,10 +76,10 @@
           </div>
         </div>
       </div>
-        <button
-          v-if="incomes.length >=2 || expenses.length >= 2"
-          @click="removeAll(['incomes', 'expenses'])"
-        >Delete both lists</button>
+      <button
+        v-if="incomes.length && expenses.length"
+        @click="removeAll(['incomes', 'expenses'])"
+      >Delete both lists</button>
     </section>
   </main>
 </template>
@@ -96,16 +94,13 @@ export default {
   },
   data() {
     return {
-      incomeCheck: false,
-      expenseCheck: false,
-
+      picked: "income",
       newInputText: "",
       newInputValue: "",
+      nextId: 0,
 
       incomes: [],
       expenses: [],
-
-      nextId: 0
     };
   },
 
@@ -139,7 +134,7 @@ export default {
     },
     totalExpenses() {
       //sum expenses + input value
-      let result = 0; 
+      let result = 0;
       this.expenses.forEach(element => {
         result += parseInt(element.value);
       });
@@ -171,35 +166,28 @@ export default {
     },
 
     checkType() {
+      
       //if income
-      if (this.incomeCheck) {
+      if (this.picked == "income") {
         //add to income array
         this.incomes.push({
           id: this.nextId++,
           name: this.newInputText,
           value: this.newInputValue
         });
-
-        this.saveData();
-        this.newInputText = "";
-        this.newInputValue = "";
-        this.incomeCheck = false;
-      }
-      //if expense
-      if (this.expenseCheck) {
+        //if expense
+      } else {
         //add to income array
         this.expenses.push({
           id: this.nextId++,
           name: this.newInputText,
           value: this.newInputValue
         });
-
+      }
         this.saveData();
-
         this.newInputText = "";
         this.newInputValue = "";
-        this.expenseCheck = false;
-      }
+        this.picked = "income";
     },
     removeItem(index, list) {
       this[list].splice(index, 1);
