@@ -95,14 +95,12 @@ export default {
   data() {
     return {
       picked: "income",
-
       newInputText: "",
       newInputValue: "",
+      nextId: 0,
 
       incomes: [],
       expenses: [],
-
-      nextId: 0
     };
   },
 
@@ -168,6 +166,7 @@ export default {
     },
 
     checkType() {
+      
       //if income
       if (this.picked == "income") {
         //add to income array
@@ -176,11 +175,6 @@ export default {
           name: this.newInputText,
           value: this.newInputValue
         });
-
-        this.saveData();
-        this.newInputText = "";
-        this.newInputValue = "";
-        this.incomeCheck = false;
         //if expense
       } else {
         //add to income array
@@ -189,13 +183,11 @@ export default {
           name: this.newInputText,
           value: this.newInputValue
         });
-
+      }
         this.saveData();
-
         this.newInputText = "";
         this.newInputValue = "";
-        this.expenseCheck = false;
-      }
+        this.picked = "income";
     },
     removeItem(index, list) {
       this[list].splice(index, 1);
