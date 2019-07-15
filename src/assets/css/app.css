@@ -18,6 +18,7 @@ input::-moz-focus-inner {
 }
 .wrapper {
   width: 100%;
+  max-width: 1440px;
   margin: 0 auto;
 }
 header {
@@ -50,39 +51,21 @@ header {
 
 .board-wrapper {
   display: flex;
-  background-color: #fbfcff;
-  padding: 40px;
 }
 .income,
 .expenses {
   width: 50%;
-  padding: 0 20px;
-}
-.total {
-  text-align: left;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
-.total p {
-  text-align: right;
-  font-size: 50px;
-  font-weight: 600;
+.income {
+  background-color: darkseagreen;
+  border-radius: 15px;
+  margin: 15px;
 }
-.total span {
-  font-size: 20px;
-}
-
-.total h2 {
-  font-size: 15px;
-}
-
-.income .total {
-  color: #2fe3a1;
-}
-.expenses .total {
-  color: #f71349;
+.expenses {
+  background-color: burlywood;
+  border-radius: 15px;
+  margin: 15px;
 }
 h1,
 h2 {
@@ -95,33 +78,21 @@ ul {
 }
 
 li {
-  display: flex;
-  font-size: 15px;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px 0;
-  border-top: solid 1px #edeff5;
-  padding: 16px 8px;
+  display: block;
+  margin: 20px 50px;
+  background-color: aliceblue;
+  padding: 20px;
+  border-radius: 15px;
+  position: relative;
+  text-align: left;
 }
 
-li:last-child {
-  border-bottom: solid 1px #edeff5;
+li span {
+  position: absolute;
+  right: 10px;
 }
-
-li strong {
-  font-size: 20px;
-}
-
-.remove {
-  background-image: url(/img/remove.svg);
-  width: 20px;
-  height: 20px;
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  background-color: transparent;
-  border: none;
-  float: right;
-  margin-left: 15px;
+a {
+  color: #42b983;
 }
 
 .pigImage {
@@ -158,18 +129,13 @@ fieldset {
 fieldset:first-of-type {
   padding-right: 40px;
 }
-label {
-  margin-right: 20px;
-}
 input {
+  display: inline-block;
   border: none;
   margin: 0;
   padding: 10px;
   border-radius: 1.5rem;
   cursor: pointer;
-}
-input[type="text"] {
-  margin-right: 20px;
 }
 input[type="submit"] {
   min-width: 160px;
