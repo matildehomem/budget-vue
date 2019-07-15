@@ -176,6 +176,8 @@ label {
 }
 input {
   border: none;
+  outline-color: transparent;
+  outline: none;
   margin: 0;
   padding: 10px;
   border-radius: 1.5rem;
@@ -208,8 +210,9 @@ input[type="submit"]:hover {
   background: #ffe36e;
 }
 input[type="submit"]:focus {
-  outline: 1px solid #fff;
-  outline-offset: -4px;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease 0s;
+  transition: opacity 0.3s ease 0s;
 }
 input[type="submit"]:active {
   -webkit-transform: scale(0.99);
