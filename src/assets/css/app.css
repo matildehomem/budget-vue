@@ -20,7 +20,7 @@ input::-moz-focus-inner {
   width: 100%;
   margin: 0 auto;
 }
-header {
+.app__header {
   width: 100vw;
   height: 456px;
   background-image: linear-gradient(147deg, #ff5c2e, #b21376);
@@ -176,6 +176,8 @@ label {
 }
 input {
   border: none;
+  outline-color: transparent;
+  outline: none;
   margin: 0;
   padding: 10px;
   border-radius: 1.5rem;
@@ -190,7 +192,7 @@ input[type="submit"] {
   margin: 0;
   text-decoration: none;
   background: #ffd102;
-  color: #fff;
+  color: #040a1a;
   font-family: sans-serif;
   font-weight: 700;
   font-size: 15px;
@@ -208,10 +210,51 @@ input[type="submit"]:hover {
   background: #ffe36e;
 }
 input[type="submit"]:focus {
-  outline: 1px solid #fff;
-  outline-offset: -4px;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease 0s;
+  transition: opacity 0.3s ease 0s;
 }
 input[type="submit"]:active {
   -webkit-transform: scale(0.99);
   transform: scale(0.99);
+}
+input[type="radio"] {
+  padding: 20px;
+}
+i {
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 10px;
+}
+.app__btn {
+  min-width: 160px;
+  padding: 10px 20px;
+  margin: 0;
+  text-decoration: none;
+  background: #fff;
+  border: solid 1px #d7dbe4;
+  border-radius: 20px;
+  color: #040a1a;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  text-align: center;
+  -webkit-transition: background 0.25s ease-in-out, -webkit-transform 0.15s ease;
+  transition: background 0.25s ease-in-out, -webkit-transform 0.15s ease;
+  transition: background 0.25s ease-in-out, transform 0.15s ease;
+  transition: background 0.25s ease-in-out, transform 0.15s ease,
+    -webkit-transform 0.15s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+button.app__btn:focus,
+button.app__btn:hover {
+  border-color: #f71349;
+  color: f71349;
+  font-weight: bold;
+}
+button.app__btn:focus {
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease 0s;
+  transition: opacity 0.3s ease 0s;
 }
