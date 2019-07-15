@@ -192,10 +192,11 @@ input[type="submit"] {
   margin: 0;
   text-decoration: none;
   background: #ffd102;
-  color: #040a1a;
+  color: #fff;
   font-family: sans-serif;
   font-weight: 700;
   font-size: 15px;
+  line-height: 20px;
   text-align: center;
   -webkit-transition: background 0.25s ease-in-out, -webkit-transform 0.15s ease;
   transition: background 0.25s ease-in-out, -webkit-transform 0.15s ease;
@@ -207,13 +208,12 @@ input[type="submit"] {
 }
 input[type="submit"]:focus,
 input[type="submit"]:hover {
-  background: #ffe36e;
+  background: #ffd772;
 }
-input[type="submit"]:focus {
-  opacity: 0;
-  -webkit-transition: opacity 0.3s ease 0s;
-  transition: opacity 0.3s ease 0s;
-}
+/* input[type="submit"]:focus {
+  
+} */
+
 input[type="submit"]:active {
   -webkit-transform: scale(0.99);
   transform: scale(0.99);
