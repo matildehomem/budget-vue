@@ -204,7 +204,7 @@ export default {
     },
 
     checkType() {
-      if ((this.isValidationAllowed = false)) return;
+      if (this.isValidationAllowed) return;
       //if income
       if (this.picked == "income") {
         //add to income array
