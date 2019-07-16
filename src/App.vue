@@ -152,8 +152,8 @@ export default {
     }
   },
   computed: {
-    //validate input
     validated() {
+      //validate input
       return this.isValidationAllowed && !this.searchTerm;
     },
     totalIncome() {
@@ -176,7 +176,6 @@ export default {
 
       return result;
     },
-
     current() {
       return this.totalIncome - this.totalExpenses;
     },
@@ -204,7 +203,8 @@ export default {
     },
 
     checkType() {
-      if (this.isValidationAllowed) return;
+      //confirm is input is empty
+      //if (this.isValidationAllowed) return;
       //if income
       if (this.picked == "income") {
         //add to income array
