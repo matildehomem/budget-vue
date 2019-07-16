@@ -20,12 +20,13 @@
               <label for="value">Euro</label>
               <input type="number" v-model="newInputValue" required />
               <label for="income">Income</label>
+              <p v-if="validated">Hey preencher o campo de valor por favor :)</p>
               <input type="radio" name="type" id="income" value="income" v-model="picked" />
               <label for="expense">Expense</label>
               <input type="radio" name="type" id="expense" value="expense" v-model="picked" />
             </fieldset>
           </div>
-          <input type="submit" value="Submeter" @click.prevent="checkType()" />
+          <input type="submit" value="Submeter" @click="validate" @click.prevent="checkType()" />
         </form>
       </div>
     </header>
@@ -128,7 +129,9 @@ export default {
       nextId: 0,
 
       incomes: [],
-      expenses: []
+      expenses: [],
+      isValidationAllowed: false,
+      searchTerm: ""
     };
   },
 
@@ -149,6 +152,10 @@ export default {
     }
   },
   computed: {
+    //validate input
+    validated() {
+      return this.isValidationAllowed && !this.searchTerm;
+    },
     totalIncome() {
       //sum current + input value
       let result = 0;
@@ -186,6 +193,9 @@ export default {
   },
 
   methods: {
+    validate() {
+      this.isValidationAllowed = true;
+    },
     saveData() {
       const incomesParsed = JSON.stringify(this.incomes);
       localStorage.setItem("incomes", incomesParsed);
@@ -194,6 +204,7 @@ export default {
     },
 
     checkType() {
+      if ((this.isValidationAllowed = false)) return;
       //if income
       if (this.picked == "income") {
         //add to income array

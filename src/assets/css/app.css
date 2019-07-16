@@ -171,8 +171,13 @@ fieldset {
 fieldset:first-of-type {
   padding-right: 40px;
 }
+fieldset p {
+  font-size: 12px;
+  color: yellow;
+  text-align: right;
+}
 label {
-  margin-right: 20px;
+  margin: 0 20px;
 }
 input {
   border: none;
