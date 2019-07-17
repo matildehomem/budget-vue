@@ -205,24 +205,19 @@ export default {
     checkType() {
       //confirm is input is empty
       //if (this.isValidationAllowed) return;
-      //if income
-      if (this.picked == "income") {
-        //add to income array
-        this.incomes.push({
-          id: this.nextId++,
-          name: this.newInputText,
-          value: this.newInputValue
-        });
-        //if expense
-      } else {
-        //add to income array
-        this.expenses.push({
-          id: this.nextId++,
-          name: this.newInputText,
-          value: this.newInputValue
-        });
+
+
+      let data = {
+        id: this.nextId++,
+        name: this.newInputText,
+        value: this.newInputValue
       }
+      
+      this.picked == "income" ? this.incomes.push(data) : this.expenses.push(data);
+      
       this.saveData();
+
+      //empty form
       this.newInputText = "";
       this.newInputValue = "";
       this.picked = "income";
