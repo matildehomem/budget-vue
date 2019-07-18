@@ -18,15 +18,20 @@
               <label for="name">Descrição</label>
               <input type="text" v-model="newInputText" />
               <label for="value">Euro</label>
-              <input type="number" v-model="newInputValue" required />
+              <input type="number" v-model="newInputValue"  />
               <label for="income">Income</label>
-              <p v-if="validated">Hey preencher o campo de valor por favor :)</p>
               <input type="radio" name="type" id="income" value="income" v-model="picked" />
               <label for="expense">Expense</label>
-              <input type="radio" name="type" id="expense" value="expense" v-model="picked" />
+              <input type="radio" name="type" id="expense" value="expense" v-model="picked"  />
             </fieldset>
+            <p v-show="isValidationAllowed==false">Hey preencher o campo de valor por favor :)</p>
           </div>
-          <input type="submit" value="Submeter" @click="validate" @click.prevent="checkType()" />
+          <input
+            type="submit"
+            value="Submeter"
+            @click="validate"
+            @click.prevent=" validate(), checkType()"
+          />
         </form>
       </div>
     </header>
@@ -130,7 +135,7 @@ export default {
 
       incomes: [],
       expenses: [],
-      isValidationAllowed: false,
+      isValidationAllowed: null,
       searchTerm: ""
     };
   },
@@ -152,10 +157,6 @@ export default {
     }
   },
   computed: {
-    validated() {
-      //validate input
-      return this.isValidationAllowed && !this.searchTerm;
-    },
     totalIncome() {
       //sum current + input value
       let result = 0;
@@ -163,9 +164,8 @@ export default {
         result += parseInt(e.value);
       });
 
-      return result;
-
       //update income
+      return result;
     },
     totalExpenses() {
       //sum expenses + input value
@@ -173,7 +173,7 @@ export default {
       this.expenses.forEach(element => {
         result += parseInt(element.value);
       });
-
+      //update expenses
       return result;
     },
     current() {
@@ -193,7 +193,10 @@ export default {
 
   methods: {
     validate() {
-      this.isValidationAllowed = true;
+      if (this.newInputText != "" && this.newInputValue != "" ) {
+        this.isValidationAllowed = true;
+      }
+      else this.isValidationAllowed = false;
     },
     saveData() {
       const incomesParsed = JSON.stringify(this.incomes);
@@ -204,23 +207,27 @@ export default {
 
     checkType() {
       //confirm is input is empty
-      //if (this.isValidationAllowed) return;
+      if (!this.isValidationAllowed) return;
 
-
+      //store data in object
       let data = {
         id: this.nextId++,
         name: this.newInputText,
         value: this.newInputValue
-      }
-      
-      this.picked == "income" ? this.incomes.push(data) : this.expenses.push(data);
-      
+      };
+
+      //push to correct array
+      this.picked == "income"
+        ? this.incomes.push(data)
+        : this.expenses.push(data);
+
       this.saveData();
 
       //empty form
       this.newInputText = "";
       this.newInputValue = "";
       this.picked = "income";
+      this.isValidationAllowed = null;
     },
     removeItem(index, list) {
       this[list].splice(index, 1);
