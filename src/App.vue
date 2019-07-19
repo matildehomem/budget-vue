@@ -24,7 +24,7 @@
               <label for="expense">Expense</label>
               <input type="radio" name="type" id="expense" value="expense" v-model="picked"  />
             </fieldset>
-            <p v-show="isValidationAllowed==false">Hey preencher o campo de valor por favor :)</p>
+            <p v-show="isValidationAllowed==false">Campos com erros</p>
           </div>
           <input
             type="submit"
@@ -35,7 +35,7 @@
         </form>
       </div>
     </header>
-    <section>
+    <section >
       <div class="wrapper board-wrapper">
         <div class="income">
           <header class="total">
@@ -193,10 +193,10 @@ export default {
 
   methods: {
     validate() {
-      if (this.newInputText != "" && this.newInputValue != "" ) {
-        this.isValidationAllowed = true;
+      if (this.newInputText == "" || this.newInputValue == "" || parseInt(this.newInputValue) <= 0 )  {
+        this.isValidationAllowed = false;
       }
-      else this.isValidationAllowed = false;
+      else this.isValidationAllowed = true;
     },
     saveData() {
       const incomesParsed = JSON.stringify(this.incomes);
@@ -207,7 +207,7 @@ export default {
 
     checkType() {
       //confirm is input is empty
-      if (!this.isValidationAllowed) return;
+      if (this.isValidationAllowed == false) return;
 
       //store data in object
       let data = {
