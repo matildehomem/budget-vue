@@ -11,19 +11,26 @@
             </div>
           </div>
         </div>
-        <p>Indique aqui as suas receitas ou despesas</p>
         <form>
           <div>
-            <fieldset>
-              <label for="name">Descrição</label>
-              <input type="text" v-model="newInputText" />
-              <label for="value">Euro</label>
-              <input type="number" v-model="newInputValue"  />
-              <label for="income">Income</label>
-              <input type="radio" name="type" id="income" value="income" v-model="picked" />
-              <label for="expense">Expense</label>
-              <input type="radio" name="type" id="expense" value="expense" v-model="picked"  />
-            </fieldset>
+              <div class="form-group">
+                <label for="name">Descrição</label>
+                <input type="text" v-model="newInputText" />
+              </div>
+
+              <div class="form-group">
+                <label for="value">Euro</label>
+                <input type="number" v-model="newInputValue" />
+              </div>
+
+              <div class="form-group">
+                <label for="income">Income</label>
+                <input type="radio" name="type" id="income" value="income" v-model="picked" />
+              </div>
+              <div class="form-group">
+                <label for="expense">Expense</label>
+                <input type="radio" name="type" id="expense" value="expense" v-model="picked" />
+              </div>
             <p v-show="isValidationAllowed==false">Campos com erros</p>
           </div>
           <input
@@ -35,8 +42,8 @@
         </form>
       </div>
     </header>
-    <section >
-      <div class="wrapper board-wrapper">
+    <section class="wrapper grey">
+      <div class="board-wrapper">
         <div class="income">
           <header class="total">
             <h2>
@@ -193,10 +200,13 @@ export default {
 
   methods: {
     validate() {
-      if (this.newInputText == "" || this.newInputValue == "" || parseInt(this.newInputValue) <= 0 )  {
+      if (
+        this.newInputText == "" ||
+        this.newInputValue == "" ||
+        parseInt(this.newInputValue) <= 0
+      ) {
         this.isValidationAllowed = false;
-      }
-      else this.isValidationAllowed = true;
+      } else this.isValidationAllowed = true;
     },
     saveData() {
       const incomesParsed = JSON.stringify(this.incomes);
