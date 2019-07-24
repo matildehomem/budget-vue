@@ -1,48 +1,48 @@
 <template>
-    <form>
-          <div>
-              <div class="form-group">
-                <label for="name">Descrição</label>
-                <input type="text" v-model="newInputText" />
-              </div>
+  <form>
+    <div>
+      <div class="form-group">
+        <label for="name">Descrição</label>
+        <input type="text" v-model="newInputText" />
+      </div>
 
-              <div class="form-group">
-                <label for="value">Euro</label>
-                <input type="number" v-model="newInputValue" />
-              </div>
+      <div class="form-group">
+        <label for="value">Euro</label>
+        <input type="number" v-model="newInputValue" />
+      </div>
 
-              <div class="form-group">
-                <label for="income">Income</label>
-                <input type="radio" name="type" id="income" value="income" v-model="picked" />
-              </div>
-              <div class="form-group">
-                <label for="expense">Expense</label>
-                <input type="radio" name="type" id="expense" value="expense" v-model="picked" />
-              </div>
-            <p v-show="isValidationAllowed==false">Campos com erros</p>
-          </div>
-          <input
-            type="submit"
-            value="Submeter"
-            @click="validate"
-            @click.prevent=" validate(), checkType()"
-          />
-        </form>
+      <div class="form-group">
+        <label for="income">Income</label>
+        <input type="radio" name="type" id="income" value="income" v-model="picked" />
+      </div>
+      <div class="form-group">
+        <label for="expense">Expense</label>
+        <input type="radio" name="type" id="expense" value="expense" v-model="picked" />
+      </div>
+      <p v-show="isValidationAllowed==false">Campos com erros</p>
+    </div>
+    <input
+      type="submit"
+      value="Submeter"
+      @click="validate"
+      @click.prevent=" validate(), checkType()"
+    />
+  </form>
 </template>
 <script>
 export default {
-    name: "InputForm",
-    props: ["incomes", "expenses"],
- data() {
+  name: "InputForm",
+  props: ["incomes", "expenses"],
+  data() {
     return {
       picked: "income",
       newInputText: "",
       newInputValue: "",
       nextId: 0,
-      isValidationAllowed: null,
+      isValidationAllowed: null
     };
   },
-   methods: {
+  methods: {
     validate() {
       if (
         this.newInputText == "" ||
@@ -52,7 +52,16 @@ export default {
         this.isValidationAllowed = false;
       } else this.isValidationAllowed = true;
     },
-     checkType() {
+     
+    
+    saveData() {
+      const incomesParsed = JSON.stringify(this.incomes);
+      localStorage.setItem("incomes", incomesParsed);
+      const expensesParsed = JSON.stringify(this.expenses);
+      localStorage.setItem("expenses", expensesParsed);
+    },
+
+    checkType() {
       //confirm is input is empty
       if (this.isValidationAllowed == false) return;
 
@@ -68,14 +77,14 @@ export default {
         ? this.incomes.push(data)
         : this.expenses.push(data);
 
-      this.$emit('saveDataInput');
+      this.saveData();
 
       //empty form
       this.newInputText = "";
       this.newInputValue = "";
       this.picked = "income";
       this.isValidationAllowed = null;
-    },
-}
-}
+    }
+  }
+};
 </script>

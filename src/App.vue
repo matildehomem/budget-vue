@@ -1,6 +1,6 @@
 <template>
   <main id="app">
-  <input-header :expenses="expenses" :incomes="incomes" :current="current" @saveDataInput="saveData"></input-header>
+  <input-header :expenses="expenses" :incomes="incomes" :current="current"></input-header>
     <section class="wrapper grey">
       <div class="board-wrapper">
         <div class="income">
@@ -85,7 +85,8 @@
 </template>
 
 <script>
-import InputHeader from "./components/InputHeader"
+import InputHeader from "./components/InputHeader";
+
 require("@/assets/css/app.css");
 export default {
   name: "app",
