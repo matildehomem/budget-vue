@@ -1,47 +1,6 @@
 <template>
   <main id="app">
-    <header class="app__header">
-      <div class="wrapper">
-        <div class="current-wrapper">
-          <div class="pigImage" :class="pigImage"></div>
-          <div class="current-box">
-            <p>O meu dinheiro</p>
-            <div>
-              <ICountUp class="current-value" :endVal="current" />€
-            </div>
-          </div>
-        </div>
-        <form>
-          <div>
-              <div class="form-group">
-                <label for="name">Descrição</label>
-                <input type="text" v-model="newInputText" />
-              </div>
-
-              <div class="form-group">
-                <label for="value">Euro</label>
-                <input type="number" v-model="newInputValue" />
-              </div>
-
-              <div class="form-group">
-                <label for="income">Income</label>
-                <input type="radio" name="type" id="income" value="income" v-model="picked" />
-              </div>
-              <div class="form-group">
-                <label for="expense">Expense</label>
-                <input type="radio" name="type" id="expense" value="expense" v-model="picked" />
-              </div>
-            <p v-show="isValidationAllowed==false">Campos com erros</p>
-          </div>
-          <input
-            type="submit"
-            value="Submeter"
-            @click="validate"
-            @click.prevent=" validate(), checkType()"
-          />
-        </form>
-      </div>
-    </header>
+  <input-header :expenses="expenses" :incomes="incomes" :current="current" @saveDataInput="saveData"></input-header>
     <section class="wrapper grey">
       <div class="board-wrapper">
         <div class="income">
@@ -126,24 +85,17 @@
 </template>
 
 <script>
-import ICountUp from "vue-countup-v2";
+import InputHeader from "./components/InputHeader"
 require("@/assets/css/app.css");
 export default {
   name: "app",
   components: {
-    ICountUp
+    'input-header': InputHeader
   },
   data() {
     return {
-      picked: "income",
-      newInputText: "",
-      newInputValue: "",
-      nextId: 0,
-
       incomes: [],
       expenses: [],
-      isValidationAllowed: null,
-      searchTerm: ""
     };
   },
 
@@ -186,28 +138,11 @@ export default {
     current() {
       return this.totalIncome - this.totalExpenses;
     },
-    pigImage: function() {
-      if (this.current < 0 && this.current > -200) {
-        return "unhappy";
-      } else if (this.current > 200) {
-        return "happy";
-      } else if (this.current < -200) {
-        return "dead";
-      }
-      return "normal";
-    }
+ 
   },
 
   methods: {
-    validate() {
-      if (
-        this.newInputText == "" ||
-        this.newInputValue == "" ||
-        parseInt(this.newInputValue) <= 0
-      ) {
-        this.isValidationAllowed = false;
-      } else this.isValidationAllowed = true;
-    },
+
     saveData() {
       const incomesParsed = JSON.stringify(this.incomes);
       localStorage.setItem("incomes", incomesParsed);
@@ -215,30 +150,6 @@ export default {
       localStorage.setItem("expenses", expensesParsed);
     },
 
-    checkType() {
-      //confirm is input is empty
-      if (this.isValidationAllowed == false) return;
-
-      //store data in object
-      let data = {
-        id: this.nextId++,
-        name: this.newInputText,
-        value: this.newInputValue
-      };
-
-      //push to correct array
-      this.picked == "income"
-        ? this.incomes.push(data)
-        : this.expenses.push(data);
-
-      this.saveData();
-
-      //empty form
-      this.newInputText = "";
-      this.newInputValue = "";
-      this.picked = "income";
-      this.isValidationAllowed = null;
-    },
     removeItem(index, list) {
       this[list].splice(index, 1);
       this.saveData();
