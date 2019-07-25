@@ -7,7 +7,7 @@
           <div class="current-box">
             <p>O meu dinheiro</p>
             <div>
-              <ICountUp class="current-value" :endVal="current" />€
+              <ICountUp class="current-value" :endVal="current" @ready="onReady"/>€
             </div>
           </div>
         </div>
