@@ -162,7 +162,8 @@ form {
   -ms-flex-direction: row;
   flex-direction: row;
   -ms-flex-pack: distribute;
-  justify-content: space-around;
+  justify-content: center;
+  margin-top: 60px;
 }
 .form-group{
   display: block;
